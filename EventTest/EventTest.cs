@@ -15,7 +15,7 @@ namespace EventTest
     class MyNotifier
     {
         // 2. 대리자 인스턴스를 event 한정자로 수식해서 선언
-        public event EventHandler SomethingHappened; 
+        public event EventHandler SomethingHappened;  
         public void DoSomething(int number)
         {
             int temp = number % 10;
