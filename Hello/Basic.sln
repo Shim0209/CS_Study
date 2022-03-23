@@ -147,17 +147,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventTest", "..\EventTest\E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CS_Basic8_Lambda", "CS_Basic8_Lambda", "{0B60402C-0085-40BA-BF09-1A59DEFB61F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLambda", "..\SimpleLambda\SimpleLambda.csproj", "{B587DBC3-0252-4CAE-9A1C-A5B823A6E67A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleLambda", "..\SimpleLambda\SimpleLambda.csproj", "{B587DBC3-0252-4CAE-9A1C-A5B823A6E67A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatementLambda", "..\StatementLambda\StatementLambda.csproj", "{6FE7EA2B-944A-4548-A0E6-C084F12A321E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatementLambda", "..\StatementLambda\StatementLambda.csproj", "{6FE7EA2B-944A-4548-A0E6-C084F12A321E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncLambda", "..\FuncLambda\FuncLambda.csproj", "{EF7A5031-0738-461C-9B70-A3760A5B5AE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncLambda", "..\FuncLambda\FuncLambda.csproj", "{EF7A5031-0738-461C-9B70-A3760A5B5AE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionLambda", "..\ActionLambda\ActionLambda.csproj", "{64CBC32F-C508-4B8A-9F26-BDCCE0C329E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionLambda", "..\ActionLambda\ActionLambda.csproj", "{64CBC32F-C508-4B8A-9F26-BDCCE0C329E1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CS_Basic9_LINQ", "CS_Basic9_LINQ", "{6BE9E66D-B0BE-4D6D-98E6-0D20922A9AD0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CS_Basic9_Expression", "CS_Basic9_Expression", "{6BE9E66D-B0BE-4D6D-98E6-0D20922A9AD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingExpressionTree", "..\UsingExpressionTree\UsingExpressionTree.csproj", "{60888DC9-87EE-4773-B9EA-8B291D83D4C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsingExpressionTree", "..\UsingExpressionTree\UsingExpressionTree.csproj", "{60888DC9-87EE-4773-B9EA-8B291D83D4C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionBodiedMember", "..\ExpressionBodiedMember\ExpressionBodiedMember.csproj", "{02F9B462-7DD4-44D5-8B2D-B538AB097044}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -437,6 +439,10 @@ Global
 		{60888DC9-87EE-4773-B9EA-8B291D83D4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60888DC9-87EE-4773-B9EA-8B291D83D4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60888DC9-87EE-4773-B9EA-8B291D83D4C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02F9B462-7DD4-44D5-8B2D-B538AB097044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F9B462-7DD4-44D5-8B2D-B538AB097044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02F9B462-7DD4-44D5-8B2D-B538AB097044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02F9B462-7DD4-44D5-8B2D-B538AB097044}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -510,6 +516,7 @@ Global
 		{EF7A5031-0738-461C-9B70-A3760A5B5AE3} = {0B60402C-0085-40BA-BF09-1A59DEFB61F2}
 		{64CBC32F-C508-4B8A-9F26-BDCCE0C329E1} = {0B60402C-0085-40BA-BF09-1A59DEFB61F2}
 		{60888DC9-87EE-4773-B9EA-8B291D83D4C4} = {6BE9E66D-B0BE-4D6D-98E6-0D20922A9AD0}
+		{02F9B462-7DD4-44D5-8B2D-B538AB097044} = {6BE9E66D-B0BE-4D6D-98E6-0D20922A9AD0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ABAB3129-9D66-48B1-9282-181420D7286A}
