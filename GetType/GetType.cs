@@ -81,15 +81,39 @@ namespace GetType
             Console.WriteLine();
         }
 
+        // 생성자 정보를 출력
+        static void PrintConstructors(Type type)
+        {
+            Console.WriteLine("-------- Constructor --------");
+
+            ConstructorInfo[] constructors = type.GetConstructors();
+            foreach (ConstructorInfo constructor in constructors)
+                Console.WriteLine($"Type:{constructor.DeclaringType.Name}, Name:{constructor.Name}");
+
+            Console.WriteLine();
+        }
+
+        // 내부형식 정보를 출력
+        static void PrintNestedTypes(Type type)
+        {
+            Console.WriteLine("-------- NestedTypes --------");
+
+            // ???
+
+            Console.WriteLine();
+        }
+
         static void Main(string[] args)
         {
-            int a = 0;
+            //int a = 0;
+            String a = "";
             Type type = a.GetType();
 
             PrintInterfaces(type);
             PrintFields(type);
             PrintMethods(type);
             PrintProperties(type);
+            PrintConstructors(type);
         }
     }
 }
