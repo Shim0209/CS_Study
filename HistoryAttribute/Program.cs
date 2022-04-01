@@ -4,6 +4,7 @@
 /// - .NET이 제공하는 애트리뷰트는 Obsolete 말고도 그 종류가 상당히 많다. 
 /// - 애트리뷰트는 그 수만큼이나 사용 방법도 다양하다. 그래서 일일이 알아보는 대신 직접 만들어서 사용한다.
 /// 
+/// 직접 만드는 방법
 /// - System.Attribute 클래스로부터 상속을 받아 만든다.
 /// - 애트리뷰트를 중복해서 사용하기 위해서는 System.AttributeUsage를 사용해야한다.
 namespace HistoryAttribute
