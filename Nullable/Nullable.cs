@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// Value Type은 NULL값을 가질 수 없다.
+/// 
+/// Value Type 변수에 NULL을 갖게하려면 System.Nullable<T>나 int?을 사용한다.
 namespace Nullable
 {
     class MainApp
