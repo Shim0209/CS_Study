@@ -19,7 +19,7 @@ namespace Touch
             Console.WriteLine($"{type} is wrong type");
             return;
         }
-        static void Main(string[] args)
+        static void Main(string[] args) // 0번 path, 1번 file/directory
         {
             if(args.Length == 0)
             {
