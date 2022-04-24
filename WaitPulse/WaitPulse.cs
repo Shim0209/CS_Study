@@ -1,23 +1,6 @@
 ﻿using System;
 using System.Threading;
 
-/// 스레드 간의 동기화
-/// - 스레드들이 순서를 갖춰 자원을 사용하게 하는 것을 동기화(Synchoronize)라고 한다.
-/// - 중요! 자원을 한 번에 하나의 스레드가 사용하도록 보장 하는것
-/// - .NET에는 lock키워드와 Monitor 클래스가 있다.
-/// 
-/// lock 키워드
-/// - 사용이 쉽다
-/// - lock키워드로 감싸주기만 하면 평범한 코드를 크리티컬 섹션으로 바꿀수 있다.
-/// * 크리티컬 섹션 - 한 번에 한 스레드만 사용할 수 있는 코드 영역
-/// - 앞 실행을 기다려야 하므로 성능이 떨어진다.
-/// - 절대 사용하지 않아야할 3가지
-///     1. lock(this) : this는 클래스 내부뿐만 아니라 외부에서도 자주 사용됨.
-///     2. lock(typeof(SomeClass)), lock(obj.GetType()) : Type 형식의 인스턴스를
-///     반환한다. 즉 코드의 어느 곳에서나 특정 형식에 대한 Type 객체를 얻을 수 있다.
-///     3. string 형식 : 어떤 코드에서든 얻어낼 수 있는 string 객체는 절대로 사용해서는
-///     안된다.
-/// 
 /// Monitor 클래스로 동기화하기
 /// - Monitor 클래스는 스레드 동기화에 사용하는 몇 가지 정적 메소드를 제공한다.
 /// - Monitor.Enter() 메소드는 크리티컬 섹션을 만든다.
@@ -30,12 +13,20 @@ using System.Threading;
 /// 꺼낸 뒤 Ready Queue에 입력한다. 입력된 차례에 따라 락을 얻어 Running 상태에 들어간다.
 /// * Thread.Sleep() 메소드도 스레드를 WaitSleepJoin 상태로 만들지만 깨울수는 없다.
 /// 
-namespace Synchronize
+/// 코드설명
+/// - 크리티컬 섹션 영역을 사용하지 않고 Pulse(), Sleep()을 통해 같은 메소드가 반복되는걸
+/// 막고 동작시킨다.
+namespace WaitPulse
 {
     class Counter
     {
         const int LOOP_COUNT = 1000;
+
         readonly object thisLock;
+        // lockedConnt와 count는 스레드가 블록될 조건을 검사하기 위해 사용됨
+        // lockedCount는 count 변수를 다른 스레드가 사용하고 있는지를 판별하기 위함
+        // count는 각 스레드가 너무 오랫동안 count 변수를 독차지하는걸 막기위함
+        bool lockedCount = false;
         private int count;
         public int Count
         {
@@ -49,56 +40,43 @@ namespace Synchronize
         public void Increase()
         {
             int loopCount = LOOP_COUNT;
+
             while (loopCount-- > 0)
             {
-                /*#region lock 사용
                 lock (thisLock)
                 {
-                    count++;
-                }
-                Thread.Sleep(1);
-                #endregion*/
+                    // count가 0보다 크거나
+                    // lockedCount가 다른 스레드에 의해 true로 바뀌어있으면 현재
+                    // 스레드를 블록시킨다.
+                    while (count > 0 || lockedCount == true)
+                        Monitor.Wait(thisLock);
 
-                #region Monitor 사용
-                Monitor.Enter(thisLock);
-                try
-                {
+                    lockedCount = true;
                     count++;
+                    // lockedCount를 false로 만든뒤에 다른 스레드를 깨운다.
+                    lockedCount = false;
+
+                    Monitor.Pulse(thisLock);
                 }
-                finally
-                {
-                    Monitor.Exit(thisLock);
-                }
-                Thread.Sleep(1);
-                #endregion
             }
         }
         public void Decrease()
         {
             int loopCount = LOOP_COUNT;
-            // lock
+
             while(loopCount-- > 0)
             {
-                /*#region lock 사용
                 lock (thisLock)
                 {
-                    count--;
-                }
-                Thread.Sleep(1);
-                #endregion*/
+                    while (count < 0 || lockedCount == true)
+                        Monitor.Wait(thisLock);
 
-                #region Monitor 사용
-                Monitor.Enter(thisLock);
-                try
-                {
+                    lockedCount = true;
                     count--;
+                    lockedCount = false;
+
+                    Monitor.Pulse(thisLock);
                 }
-                finally
-                {
-                    Monitor.Exit(thisLock);
-                }
-                Thread.Sleep(1);
-                #endregion
             }
         }
     }
@@ -112,13 +90,12 @@ namespace Synchronize
             Thread decThread = new Thread(new ThreadStart(counter.Decrease));
 
             incThread.Start();
-            decThread.Start();  
+            decThread.Start();
 
             incThread.Join();
             decThread.Join();
 
-            Console.WriteLine(counter.Count); 
-            // 결과 : 0
+            Console.WriteLine(counter.Count);
         }
     }
 }
