@@ -18,6 +18,11 @@ using System.Threading;
 ///     3. string 형식 : 어떤 코드에서든 얻어낼 수 있는 string 객체는 절대로 사용해서는
 ///     안된다.
 /// 
+/// Monitor 클래스로 동기화하기
+/// - Monitor 클래스는 스레드 동기화에 사용하는 몇 가지 정적 메소드를 제공한다.
+/// - Monitor.Enter() 메소드는 크리티컬 섹션을 만든다.
+/// - Monitor.Exit() 메소드는 크리티컬 섹션을 제거한다.
+/// 
 namespace Synchronize
 {
     class Counter
@@ -39,23 +44,54 @@ namespace Synchronize
             int loopCount = LOOP_COUNT;
             while (loopCount-- > 0)
             {
+                /*#region lock 사용
                 lock (thisLock)
                 {
                     count++;
                 }
                 Thread.Sleep(1);
+                #endregion*/
+
+                #region Monitor 사용
+                Monitor.Enter(thisLock);
+                try
+                {
+                    count++;
+                }
+                finally
+                {
+                    Monitor.Exit(thisLock);
+                }
+                Thread.Sleep(1);
+                #endregion
             }
         }
         public void Decrease()
         {
             int loopCount = LOOP_COUNT;
+            // lock
             while(loopCount-- > 0)
             {
+                /*#region lock 사용
                 lock (thisLock)
                 {
                     count--;
                 }
                 Thread.Sleep(1);
+                #endregion*/
+
+                #region Monitor 사용
+                Monitor.Enter(thisLock);
+                try
+                {
+                    count--;
+                }
+                finally
+                {
+                    Monitor.Exit(thisLock);
+                }
+                Thread.Sleep(1);
+                #endregion
             }
         }
     }
