@@ -11,6 +11,7 @@ namespace TaskResult
 {
     class MainApp
     {
+        // 소수 구하는 메소드 (1과 자기 자신만으로 나누어떨어지는 정수)
         static bool IsPrime(long number)
         {
             if (number < 2)
@@ -30,10 +31,12 @@ namespace TaskResult
 
         static void Main(string[] args)
         {
+            // 프로그램 실행 조건
             long from = 0; //Convert.ToInt64(args[0]);
             long to = 100000; // Convert.ToInt64(args[1]);
             int taskCount = 10; //Convert.ToInt32(args[2]); => taskCount에 따라서 처리 시간의 차이가 발생한다.
 
+            // Func 대리자 정의
             Func<object, List<long>> FindPrimeFunc = (objRange) =>
             {
                 long[] range = (long[])objRange;
@@ -47,6 +50,7 @@ namespace TaskResult
                 return found;
             };
 
+            // 실행 조건에 따른 Task 생성
             Task<List<long>>[] tasks = new Task<List<long>>[taskCount];
             long currentFrom = from;
             long currentTo = to/tasks.Length;
@@ -62,6 +66,7 @@ namespace TaskResult
                     currentTo = currentTo + (to / tasks.Length);
             }
 
+            // 생성된 Task 실행
             Console.WriteLine("Please press enter to start...");
             Console.ReadLine();
             Console.WriteLine("Started...");
@@ -78,10 +83,12 @@ namespace TaskResult
                 task.Wait();
                 total.AddRange(task.Result.ToArray());
             }
+
             DateTime endTime = DateTime.Now;
 
             TimeSpan elapsed = endTime - startTime;
 
+            // 결과 출력
             Console.WriteLine($"Prime number count between {from} and {to} : {total.Count}");
             Console.WriteLine($"Elapsed time : {elapsed}");
         }
