@@ -28,18 +28,15 @@ namespace UsingTask
 
             Task t1 = new Task(FileCopyAction, new string[] { srcFile, srcFile + ".copy1" });
 
-            Console.WriteLine("----------2");
             Task t2 = Task.Run(() =>
             {
                 FileCopyAction(new string[] { srcFile, srcFile + ".copy2" });
             });
 
-            Console.WriteLine("----------1");
             t1.Start();
 
             Task t3 = new Task(FileCopyAction, new string[] { srcFile, srcFile + ".copy3" });
 
-            Console.WriteLine("----------3");
             t3.RunSynchronously(); // RunSynchronously는 동기 실행을 위한 메소드이다.
 
             t1.Wait();
