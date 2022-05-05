@@ -17,7 +17,7 @@
 
 namespace ConstraintsOnTypeParameters
 {
-    // 구조체
+    // 값 형식
     class StructArray<T> where T : struct
     {
         public T[] Array { get; set; }
@@ -26,7 +26,7 @@ namespace ConstraintsOnTypeParameters
             Array = new T[size];
         }
     }
-
+    // 참조 형식
     class RefArray<T> where T : class
     {
         public T[] Array { get; set; }
@@ -35,7 +35,7 @@ namespace ConstraintsOnTypeParameters
             Array = new T[size];
         }
     }
-
+    // 상속
     class Base : ICloneable
     {
         public object Clone()
@@ -51,12 +51,14 @@ namespace ConstraintsOnTypeParameters
         {
             Array = new T[size];
         }
+        // 또 다른 형식 매개변수 상속
         public void CopyArray<U>(U[] Source) where U : T
         {
             Source.CopyTo(Array, 0);
         }
     }
 
+    // 인터페이스
     class Hi : ICloneable
     {
         public object Clone()
