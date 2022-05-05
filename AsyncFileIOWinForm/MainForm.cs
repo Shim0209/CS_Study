@@ -33,6 +33,7 @@ namespace AsyncFileIOWinForm
                 {
                     byte[] buffer = new byte[1024 * 1024];
                     int nRead = 0;
+
                     while((nRead = await fromStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
                     {
                         await toStream.WriteAsync(buffer, 0, nRead);
