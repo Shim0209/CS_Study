@@ -13,8 +13,6 @@
 /// - where T : 기반_클래스_이름     (T는 명시한 기반 클래스의 파생 클래스여야 한다)
 /// - where T : 인터페이스_이름      (T는 명시한 인터페이스를 반드시 구현해야 한다. 인터페이스_이름에는 여러 개의 인터페이스를 명시할 수도 있다)
 /// - where T : U                   (T는 또 다른 형식 매개변수 U로부터 상속받은 클래스여야 한다)
-/// 
-
 namespace ConstraintsOnTypeParameters
 {
     // 값 형식
@@ -66,12 +64,29 @@ namespace ConstraintsOnTypeParameters
             throw new NotImplementedException();
         }
     }
+
     class HiArray<T> where T : ICloneable
     {
         public T[] Array { get; set; }
         public HiArray(int size)
         {
             Array = new T[size];
+        }
+    }
+
+    class TestClass
+    {
+        string name { get; set; }
+        // 기본 생성자
+       /* public TestClass()
+        {
+
+        }*/
+
+        // 매개변수가 있는 생성자
+        public TestClass(string name)
+        {
+            this.name = name;
         }
     }
 
@@ -82,8 +97,12 @@ namespace ConstraintsOnTypeParameters
         {
             return new T();
         }
+
+
         static void Main(string[] args)
         {
+            //TestClass test = CreateInstance<TestClass>();
+            
             StructArray<int> a = new StructArray<int>(3);
             a.Array[0] = 0;
             a.Array[1] = 1;
@@ -95,6 +114,14 @@ namespace ConstraintsOnTypeParameters
             b.Array[2] = new StructArray<double>(100);
             b.Array[0].Array[0] = 0.1;
             b.Array[0].Array[1] = 0.2;
+            b.Array[2].Array[60] = 0.5;
+
+            b
+            {
+                { 0.1, 0.2, , , },
+                {},
+                {,,,,,,,0.5}
+            }
 
             BaseArray<Base> c = new BaseArray<Base>(3);
             c.Array[0] = new Base();
